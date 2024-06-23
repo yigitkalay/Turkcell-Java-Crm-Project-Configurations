@@ -1,0 +1,32 @@
+ds:
+  port: 8888
+ps:
+  port: 5433
+
+spring:
+  # add kafka configurations below spring
+  datasource:
+    # This field is customizable.
+    url: jdbc:postgresql://localhost:${ps.port}/crm
+    # This field is customizable.
+    username: postgres
+    # This field is customizable.
+    password: test
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+
+server:
+  # This field is customizable.
+  port: 8084
+
+eureka:
+  client:
+    serviceUrl:
+      # This field port is customizable, if it changed eureka routes must be changed as well.
+      defaultZone: http://localhost:${ds.port}/eureka/
+    registerWithEureka: true
+    fetchRegistry: true

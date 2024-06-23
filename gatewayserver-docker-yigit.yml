@@ -1,0 +1,28 @@
+ds:
+  port: 8888
+
+spring:
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: eureka
+            uri: http://discovery-server:${ds.port}
+            predicates:
+              - Path=/eureka/web
+            filters:
+              - SetPath=/
+          - id: eureka-static
+            uri: http://discovery-server:${ds.port}
+            predicates:
+              - Path=/eureka/**
+server:
+  port: 8090
+          
+eureka:
+  client:
+    serviceUrl:
+      # This field port is customizable, if it changed eureka routes must be changed as well.
+      defaultZone: http://discovery-server:${ds.port}/eureka/
+    registerWithEureka: true
+    fetchRegistry: true

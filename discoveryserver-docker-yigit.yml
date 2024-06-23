@@ -1,0 +1,12 @@
+# This field port section is customizable.
+server:
+  port: 8888
+
+eureka:
+  client:
+    serviceUrl:
+      # This field port section is customizable.
+      defaultZone: http://discovery-server:${server.port}/eureka/
+    registerWithEureka: false
+    fetchRegistry: false
+  
